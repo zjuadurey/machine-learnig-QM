@@ -17,8 +17,11 @@ sp_h.shape
 ### 3 哈密顿量基态的变分近似/平均场近似
 首先可以尝试使用一个非常简单的平均场近似
 $\langle \sigma^{z}_1,\dots \sigma^{z}_N| \Psi_{\mathrm{mf}} \rangle = \Pi_{i=1}^{N} \Phi(\sigma^{z}_i)$
+对于归一化的单旋转概率，我们将采取统计形式：
 
-定义一个近似于波函数振幅(或密度矩阵值)的对数的变分函数,我们称这个变分函数为模型
+$P(\sigma_z; \lambda) = 1/(1+\exp(-\lambda \sigma_z))$
+
+因此依赖于实值变分参数λ。在NetKet中，必须定义一个近似于波函数振幅(或密度矩阵值)的对数的变分函数。我们称这个变分函数为模型(是的，M是大写的)。
 
 $\langle \sigma^{z}_1,\dots \sigma^{z}_N| \Psi_{\mathrm{mf}} \rangle = \exp\left[\mathrm{Model}(\sigma^{z}_1,\dots \sigma^{z}_N ; \theta ) \right]$
 
@@ -27,6 +30,21 @@ $\theta$是是一组参数
 模型本身只是一组关于如何初始化参数和如何计算结果的指令
 
 为了实际创建具有其参数的变化状态，最简单的方法是构造一个蒙特卡罗采样的变分状态。为此，我们首先需要定义采样器，这里使用一个简单的默认采样器：一个一个地将配置中的自旋翻转
+
+```
+# Create an instance of the model. 
+# Notice that this does not create the parameters, but only the specification of how the model is constructed and acts upon inputs/.
+mf_model = MF()
+
+# Create the local sampler on the hilbert space
+sampler = nk.sampler.MetropolisLocal(hi)
+
+# Construct the variational state using the model and the sampler above.
+# n_samples specifies how many samples should be used to compute expectation
+# values.
+vstate = nk.vqs.MCState(sampler, mf_model, n_samples=512)
+```
+有了变分态，就可以计算各种数值，比如算子的期望值
 ### 4 变分蒙特卡洛
 ##### 4a 优化循环 
 优化(或训练)循环必须做一件非常简单的事情:在每次迭代中，它必须计算能量和它的梯度，然后将梯度乘以一定的学习率λ=0.05，最后它必须用这个缩放的梯度更新参数
