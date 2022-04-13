@@ -1,20 +1,31 @@
 # 毕设总体路线梳理
+
 ## 一 算法总体框架
+
 ### 1 定义哈密顿量
+
 首先需要定义我们要处理的自由度（例如，如果我们有自旋，玻色子，费米子等），方法是指定问题的希尔伯特空间完成
-```
+
+```python
 hi = nk.hilbert.Spin(s = 0.5, N = graph.n_nodes)
 ```
+
 然后指定哈密顿量。
-```
+
+```python
+
 H: LocalOperator(dim=16, #acting_on=64 locations, constant=0, dtype=float64)
 ```
+
 ### 2 精确对角化($4\times4$之前可以验证算法精度)
-```
+
+```python
 sp_h=H.to_sparse()
 sp_h.shape
 ```
+
 ### 3 哈密顿量基态的变分近似/平均场近似
+
 首先可以尝试使用一个非常简单的平均场近似
 $\langle \sigma^{z}_1,\dots \sigma^{z}_N| \Psi_{\mathrm{mf}} \rangle = \Pi_{i=1}^{N} \Phi(\sigma^{z}_i)$
 对于归一化的单旋转概率，我们将采取统计形式：
@@ -31,7 +42,7 @@ $\theta$是是一组参数
 
 为了实际创建具有其参数的变化状态，最简单的方法是构造一个蒙特卡罗采样的变分状态。为此，我们首先需要定义采样器，这里使用一个简单的默认采样器：一个一个地将配置中的自旋翻转
 
-```
+```python
 # Create an instance of the model. 
 # Notice that this does not create the parameters, but only the specification of how the model is constructed and acts upon inputs/.
 mf_model = MF()
@@ -44,12 +55,18 @@ sampler = nk.sampler.MetropolisLocal(hi)
 # values.
 vstate = nk.vqs.MCState(sampler, mf_model, n_samples=512)
 ```
+
 有了变分态，就可以计算各种数值，比如算子的期望值
+
 ### 4 变分蒙特卡洛
+
 ##### 4a 优化循环 
+
 优化(或训练)循环必须做一件非常简单的事情:在每次迭代中，它必须计算能量和它的梯度，然后将梯度乘以一定的学习率λ=0.05，最后它必须用这个缩放的梯度更新参数
+
 ##### 4b netket自带优化循环
-```
+
+```python
 # First we reset the parameters to run the optimisation again
 vstate.init_parameters()
 
