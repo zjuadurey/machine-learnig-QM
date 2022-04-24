@@ -158,7 +158,7 @@ optimizer = nk.optimizer.Sgd(learning_rate=0.01)
 gs = nk.driver.VMC(H, optimizer, variational_state=vstate,preconditioner=nk.optimizer.SR(diag_shift=0.01))
 
 log=nk.logging.RuntimeLog()
-gs.run(n_iter=1000,out="<text%0.2f>"%(J), obs=obs)
+gs.run(n_iter=10,out="test/<text%0.2f>"%(J), obs=obs)
 
 ffn_energy=vstate.expect(H)
 #error=abs((ffn_energy.mean-eig_vals[0])/eig_vals[0])
