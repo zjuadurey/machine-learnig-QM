@@ -1,3 +1,4 @@
+python3 test_ffn_structure_factor.py 0
 python3 test_ffn_structure_factor.py 0.1
 python3 test_ffn_structure_factor.py 0.2
 python3 test_ffn_structure_factor.py 0.3
@@ -7,3 +8,4 @@ python3 test_ffn_structure_factor.py 0.6
 python3 test_ffn_structure_factor.py 0.7
 python3 test_ffn_structure_factor.py 0.8
 python3 test_ffn_structure_factor.py 0.9
+python3 test_ffn_structure_factor.py 1
