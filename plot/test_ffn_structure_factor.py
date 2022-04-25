@@ -23,7 +23,7 @@ import numpy as np                     # Ordinary NumPy
 import optax  
 
 #晶格相互作用对定义
-size = (4,4)
+size = (7,7)
 row_num, col_num = size
 n_lattice = row_num * col_num
 num = [ i for i in range(row_num * col_num)]
@@ -157,8 +157,10 @@ optimizer = nk.optimizer.Sgd(learning_rate=0.01)
 # Notice the use, again of Stochastic Reconfiguration, which considerably improves the optimisation
 gs = nk.driver.VMC(H, optimizer, variational_state=vstate,preconditioner=nk.optimizer.SR(diag_shift=0.01))
 
+
+#################### here  J & iter are needed to be changed ####################
 log=nk.logging.RuntimeLog()
-gs.run(n_iter=10,out="<text%0.2f_iter_1000_4*4>"%(J), obs=obs)
+gs.run(n_iter=1000,out="log_data_7*7/<text%0.2f_iter_1000_7*7>"%(J), obs=obs)
 
 ffn_energy=vstate.expect(H)
 #error=abs((ffn_energy.mean-eig_vals[0])/eig_vals[0])
