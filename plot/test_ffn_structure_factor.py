@@ -23,7 +23,8 @@ import numpy as np                     # Ordinary NumPy
 import optax  
 
 #晶格相互作用对定义
-size = (7,7)
+L = int(sys.argv[1])
+size = (L,L)
 row_num, col_num = size
 n_lattice = row_num * col_num
 num = [ i for i in range(row_num * col_num)]
@@ -71,7 +72,7 @@ sy = [[0, -1j], [1j, 0]]
 sz = [[1, 0], [0, -1]]
 #parameter
 h=1
-J=float(sys.argv[1])
+J=float(sys.argv[2])
 #g = J / h
 H = nk.operator.LocalOperator(hi)
 for i in edges:
@@ -160,7 +161,7 @@ gs = nk.driver.VMC(H, optimizer, variational_state=vstate,preconditioner=nk.opti
 
 #################### here  J & iter are needed to be changed ####################
 log=nk.logging.RuntimeLog()
-gs.run(n_iter=1000,out="log_data_7*7/<text%0.2f_iter_1000_7*7>"%(J), obs=obs)
+gs.run(n_iter=int(sys.argv[3]), out="log_data_%d*%d_structure_factor/<text%0.2f_iter_%d_%d*%d>"%(L, L, J, int(sys.argv[3]), L, L), obs=obs)
 
 ffn_energy=vstate.expect(H)
 #error=abs((ffn_energy.mean-eig_vals[0])/eig_vals[0])
