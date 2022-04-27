@@ -1,0 +1,11 @@
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
+python3 test_ffn_structure_factor.py 4 1 1000
