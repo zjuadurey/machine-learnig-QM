@@ -137,8 +137,8 @@ def d1tod2pbc(po, row_num, col_num):
 msxsx = (np.kron(sx, sx)) 
 sfx = []
 sitesfx = []
-kx = sys.argv[4]
-ky = sys.argv[5]
+kx = int(sys.argv[4])
+ky = int(sys.argv[5])
 for i in range(0, n_lattice):
     xi, yi = d1tod2(i, row_num, col_num)
     for k in range(i, n_lattice):
@@ -149,7 +149,7 @@ for i in range(0, n_lattice):
             xk2, yk2 = d1tod2pbc(k, row_num, col_num)
             absx = min(abs(xi-xk1),abs(xi-xk2)) 
             absy = min(abs(yi-yk1),abs(yi-yk2))
-            sfx.append((cmath.exp(-complex(0,absx*kx+absy*ky))*msxsx).tolist())
+            sfx.append((cmath.exp(-complex(0,absx*2*3.14*kx+absy*2*3.14*ky))*msxsx).tolist())
             #sfy.append((cmath.exp(-complex(0,absx*kx+absy*ky))*msysy).tolist())
             #sfz.append((cmath.exp(-complex(0,absx*kx+absy*ky))*mszsz).tolist())
             sitesfx.append([i,k])
