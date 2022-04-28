@@ -1,9 +1,7 @@
-python3 test_ffn_structure_factor.py 0.1
-python3 test_ffn_structure_factor.py 0.2
-python3 test_ffn_structure_factor.py 0.3
-python3 test_ffn_structure_factor.py 0.4
-python3 test_ffn_structure_factor.py 0.5
-python3 test_ffn_structure_factor.py 0.6
-python3 test_ffn_structure_factor.py 0.7
-python3 test_ffn_structure_factor.py 0.8
-python3 test_ffn_structure_factor.py 0.9
+for (( ky=0; ky <= 100; ky+=4 ))
+do
+	for (( kx=0; kx <= 100; kx+=4 ))
+	do
+    	python3 test_ffn_structure_factor_xy.py L J iterations $kx $ky
+	done
+done
