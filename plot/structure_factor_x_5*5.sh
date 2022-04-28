@@ -1,7 +1,9 @@
-for (( ky=0; ky <= 100; ky+=4 ))
+for (( kx=0; kx <= 100; kx+=4 ))
 do
-	for (( kx=0; kx <= 100; kx+=4 ))
+	for (( ky=0; ky <= 100; ky+=4 ))
 	do
-    	python3 test_ffn_structure_factor_xx.py 5 0.01 1000 $kx $ky
+		echo "sh: kx:$kx ky:$ky start"
+    	python3 test_ffn_structure_factor_x.py 5 0.01 1000 $kx $ky
+		echo "sh: kx:$kx ky:$ky done"
 	done
 done
