@@ -1,4 +1,4 @@
-for (( kx=0; kx <= 100; kx+=5 ))
+for (( kx=70; kx <= 100; kx+=5 ))
 do
 	for (( ky=0; ky <= 100; ky+=5 ))
 	do

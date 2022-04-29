@@ -1,7 +1,12 @@
-for (( ky=0; ky <= 100; ky+=4 ))
+for ((ky = 50; ky <= 100; ky+=5))
 do
-	for (( kx=0; kx <= 100; kx+=4 ))
+	echo "sh: kx:45 ky:$ky start"
+done
+
+for (( kx=50; kx <= 100; kx+=5 ))
+do
+	for (( ky=0; ky <= 100; ky+=5 ))
 	do
-    	python3 test_ffn_structure_factor_xy.py L J iterations $kx $ky
+		echo "sh: kx:$kx ky:$ky start"
 	done
 done
