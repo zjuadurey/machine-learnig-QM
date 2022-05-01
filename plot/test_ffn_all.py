@@ -137,6 +137,8 @@ def d1tod2pbc(po, row_num, col_num):
 msxsx = (np.kron(sx, sx)) 
 sfx = []
 sitesfx = []
+kx = int(0)
+ky = int(0)
 for i in range(0, n_lattice):
     xi, yi = d1tod2(i, row_num, col_num)
     for k in range(i, n_lattice):
@@ -146,8 +148,11 @@ for i in range(0, n_lattice):
             xk1, yk1 = d1tod2(k, row_num, col_num)
             xk2, yk2 = d1tod2pbc(k, row_num, col_num)
 #             dis = min(math.sqrt(abs(xi-xk1)**2+abs(yi-yk1)**2), math.sqrt(abs(xi-xk2)**2+abs(yi-yk2)**2))
-            absx = min(abs(xi-xk1),abs(xi-xk2))
-            sfx.append((cmath.exp(-complex(0,2*absx*3.14/3))*msxsx).tolist())
+            absx = min(abs(xi-xk1),abs(xi-xk2)) 
+            absy = min(abs(yi-yk1),abs(yi-yk2))
+            sfx.append((cmath.exp(-complex(0,absx*2*3.14*kx+absy*2*3.14*ky))*msxsx).tolist())
+            #sfy.append((cmath.exp(-complex(0,absx*kx+absy*ky))*msysy).tolist())
+            #sfz.append((cmath.exp(-complex(0,absx*kx+absy*ky))*mszsz).tolist())
             sitesfx.append([i,k])
 
 structure_factorx = nk.operator.LocalOperator(hi, sfx, sitesfx)
@@ -200,7 +205,7 @@ optimizer = nk.optimizer.Sgd(learning_rate=0.01)
 gs = nk.driver.VMC(H, optimizer, variational_state=vstate,preconditioner=nk.optimizer.SR(diag_shift=0.01))
 
 log=nk.logging.RuntimeLog()
-gs.run(n_iter=int(sys.argv[3]), out="log_data_%d*%d_all_2/<text%0.2f_iter_%d_%d*%d>"%(L, L, J, int(sys.argv[3]), L, L), obs=obs)
+gs.run(n_iter=int(sys.argv[3]), out="log_data_%d*%d_all_kx_%d_ky_%d/<text%0.2f_iter_%d_%d*%d>"%(L, L, kx, ky, J, int(sys.argv[3]), L, L), obs=obs)
 
 ffn_energy=vstate.expect(H)
 #error=abs((ffn_energy.mean-eig_vals[0])/eig_vals[0])
