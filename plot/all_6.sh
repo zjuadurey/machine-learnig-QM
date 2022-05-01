@@ -1,21 +1,7 @@
-python3 test_ffn_all.py 6 0.00 1000
-python3 test_ffn_all.py 6 0.05 1000
-python3 test_ffn_all.py 6 0.10 1000
-python3 test_ffn_all.py 6 0.15 1000
-python3 test_ffn_all.py 6 0.20 1000
-python3 test_ffn_all.py 6 0.25 1000
-python3 test_ffn_all.py 6 0.30 1000
-python3 test_ffn_all.py 6 0.35 1000
-python3 test_ffn_all.py 6 0.40 1000
-python3 test_ffn_all.py 6 0.45 1000
-python3 test_ffn_all.py 6 0.50 1000
-python3 test_ffn_all.py 6 0.55 1000
-python3 test_ffn_all.py 6 0.60 1000
-python3 test_ffn_all.py 6 0.65 1000
-python3 test_ffn_all.py 6 0.70 1000
-python3 test_ffn_all.py 6 0.75 1000
-python3 test_ffn_all.py 6 0.80 1000
-python3 test_ffn_all.py 6 0.85 1000
-python3 test_ffn_all.py 6 0.90 1000
-python3 test_ffn_all.py 6 0.95 1000
-python3 test_ffn_all.py 6 1.00 1000
+for g in 0.00 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.40 0.45 0.50 0.55 0.60 0.65 0.70 0.75 0.80 0.85 0.90 0.95 1.00
+    do
+    {    echo "test_ffn_all.py 6 $g 1000"
+        python3 test_ffn_all.py 6 $g 1000
+    } & done
+exit
+#python3 test_ffn_all.py 7 0.00 1000
