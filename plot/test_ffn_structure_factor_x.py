@@ -165,7 +165,7 @@ gs = nk.driver.VMC(H, optimizer, variational_state=vstate,preconditioner=nk.opti
 
 #################### here  J & iter are needed to be changed ####################
 log=nk.logging.RuntimeLog()
-gs.run(n_iter=int(sys.argv[3]), out="log_data_%d*%d_structure_factor_x/<text%0.2f_iter_%d_%d*%d_kx_%d_ky_%d>"%(L, L, J, int(sys.argv[3]), L, L, kx, ky), obs=obs)
+gs.run(n_iter=int(sys.argv[3]), out="log_data_%d*%d_structure_factor_x_g_%0.2f/<text%0.2f_iter_%d_%d*%d_kx_%d_ky_%d>"%(L, L, J, J, int(sys.argv[3]), L, L, kx, ky), obs=obs)
 
 ffn_energy=vstate.expect(H)
 #error=abs((ffn_energy.mean-eig_vals[0])/eig_vals[0])
